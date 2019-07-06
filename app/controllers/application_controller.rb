@@ -18,13 +18,18 @@ class ApplicationController < Sinatra::Base
 
   post "/signup" do
     #your code here
-    if params[:password].empty? || if params[:username].empty?
-      redirect to '/failure'
+    if params[:password].empty?
+      redirect '/failure'
+    end
+
+    if params[:username].empty?
+      redirect 'failure'
     else
       User.create(username: params[:username], password: params[:password])
       redirect '/login'
     end
   end
+
 
   get '/account' do
     @user = User.find(session[:user_id])
